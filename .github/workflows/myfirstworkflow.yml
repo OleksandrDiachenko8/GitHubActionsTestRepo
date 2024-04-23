@@ -1,0 +1,17 @@
+name: learn-github-actions
+run-name: ${{ github.actor }} is learning GitHub Actions
+on: [push]
+jobs:
+  check-python-version:
+    runs-on: ubuntu-latest
+    env:
+      secret_api_key: ${{ secrets.SECRETAPI }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10' 
+      - run: python3 -v || python -v
+      - name: Show secret api
+        run: echo $secret_api_key
+      - run: python python_script.py
