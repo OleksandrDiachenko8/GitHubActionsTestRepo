@@ -1,17 +1,30 @@
 name: learn-github-actions
 run-name: ${{ github.actor }} is learning GitHub Actions
-on: [push]
+on:
+  workflow_dispatch:
+  push:
+    paths-ignore:
+     - '.github/workflows/*'  
 jobs:
   check-python-version:
     runs-on: ubuntu-latest
     env:
       secret_api_key: ${{ secrets.SECRETAPI }}
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+    steps:      
+      - name: Get repository code
+        uses: actions/checkout@v4
+      - name: Cache deps
+        uses: actions/cache@v4
+        with:
+          path: where
+          key: pymodules-${{ hashFiles(**/dependencies.txt) }}
+      - name: Install Python
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10' 
-      - run: python3 -v || python -v
+      - name: Check python version
+        run: python -v 
       - name: Show secret api
         run: echo $secret_api_key
-      - run: python python_script.py
+      - name: Execute script
+        run: python python_script.py
