@@ -11,13 +11,14 @@ jobs:
     env:
       DATASET_URL: 'https://datasets.imdbws.com/'
       DATASET_NAME: 'title.basics.tsv'
-    steps:      
+    steps:
+      - name: Get repository code
+        uses: actions/checkout@v4
       - name: Download imdb dataset
         run: wget ${DATASET_URL}${DATASET_NAME}.gz
       - name: Unzip dataset archive
-        run: gzip -d ${DATASET_NAME}.gz      
-      - name: Get repository code
-        uses: actions/checkout@v4    
+        run: gzip -d ${DATASET_NAME}.gz
+      - run: ls -l          
       - name: Install Python
         uses: actions/setup-python@v5
         with:
