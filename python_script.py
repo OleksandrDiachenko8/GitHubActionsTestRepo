@@ -6,7 +6,7 @@ with open("title.basics.tsv") as file:
         linenumber += 1        
         print(line)
         with open("movies.txt", 'a') as f:
-            f.write(line + '\n')
+            f.write(str(line)  + '\n')
         if linenumber > 25:
           break
           
