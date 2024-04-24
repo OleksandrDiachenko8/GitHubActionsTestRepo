@@ -1,5 +1,4 @@
 import csv
-
 with open("title.basics.tsv") as file:    
     tsv_file = csv.reader(file, delimiter="\t")    
     linenumber = 0
