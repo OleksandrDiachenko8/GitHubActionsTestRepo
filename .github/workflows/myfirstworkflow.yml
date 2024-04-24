@@ -23,6 +23,7 @@ jobs:
           path: ${{ env.DATASET_NAME }}          
   get-python:
     runs-on: ubuntu-latest
+    needs: get-dataset
     # env:
     #   secret_api_key: ${{ secrets.SECRETAPI }}
     steps:      
