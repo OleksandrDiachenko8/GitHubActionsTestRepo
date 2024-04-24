@@ -20,7 +20,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: dataset-file
-          path: ${DATASET_NAME}          
+          path: ${{ env.DATASET_NAME }}          
   get-python:
     runs-on: ubuntu-latest
     # env:
