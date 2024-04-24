@@ -15,39 +15,17 @@ jobs:
       - name: Download imdb dataset
         run: wget ${DATASET_URL}${DATASET_NAME}.gz
       - name: Unzip dataset archive
-        run: gzip -d ${DATASET_NAME}.gz
-      - name: Upload datasets file
-        uses: actions/upload-artifact@v4
-        with:
-          name: dataset-file
-          path: ${{ env.DATASET_NAME }}          
-  get-python:
-    runs-on: ubuntu-latest
-    needs: get-dataset
-    # env:
-    #   secret_api_key: ${{ secrets.SECRETAPI }}
-    steps:      
+        run: gzip -d ${DATASET_NAME}.gz      
       - name: Get repository code
-        uses: actions/checkout@v4
-    #   - name: Cache deps
-    #     uses: actions/cache@v4
-    #     with:
-    #       path: where
-    #       key: pymodules-${{ hashFiles(**/dependencies.txt) }}      
+        uses: actions/checkout@v4    
       - name: Install Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.10' 
       - name: Check python version
-        run: python -v 
-     #  - name: Show secret api
-     #    run: echo $secret_api_key
+        run: python -v      
       - name: Install dependencies
-        run: pip install -r requirements.txt
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: dataset-file
+        run: pip install -r requirements.txt      
       - name: Execute script
         run: python python_script.py
       - name: Upload result file
